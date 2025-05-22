@@ -43,8 +43,8 @@ function inputValidation(){
   // Регулярные выражения
   const namePattern = /^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+$/;
   const postPattern = /^[А-ЯЁа-яёA-Za-z0-9\s\-]+$/;
-  const cellphonePattern = /^\+7\s\d{3}\s\d{3}\s\d{4}$/;
-  const phonePattern = /^8\d{10}$/;
+  const cellphonePattern = /^\+7\d{10}$/;
+  const phonePattern = /^8\d{9}$/;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   // Проверка каждого поля
@@ -59,12 +59,12 @@ function inputValidation(){
   }
 
   if (!cellphonePattern.test(cellphone)) {
-    alert('Некорректный мобильный телефон. Формат: +7 000 000 0000.');
+    alert('Некорректный мобильный телефон. Формат: +7XXXXXXXXXX.');
     return false;
   }
 
   if (!phonePattern.test(phone)) {
-    alert('Некорректный городской телефон. Формат: 8XXXXXXXXXX.');
+    alert('Некорректный городской телефон. Формат: 8XXXXXXXXX.');
     return false;
   }
 
@@ -101,8 +101,13 @@ window.addEventListener('load', () => {
 
 
 
+// Добавление события submit для вызова функции getValues при отправке формы
+// Позволяет исклчить нежелательную перезагрузку страницы формы в процессе валидации
+document.querySelector('.register-form-container').addEventListener('submit', getValues);
+
 // Функция считывания данных с формы их валидация и отправка на сервер
-function getValues(){
+function getValues(event){
+  event.preventDefault();
   //console.clear();
 
 // Проверка есть ли среди полей input на форме пустые значения. 
@@ -112,7 +117,7 @@ function getValues(){
     alert('Неоходимо заполнить все поля');
     return;
 
-
+  }
 // Проверка валидности данных
 // Если проверка не пройдена происходит выход из функции
   if (!inputValidation()) {
@@ -120,7 +125,6 @@ function getValues(){
   }
 
 
-}
   
 
 // Запись значений всех полей input на форме в словарь для дальнейшей отправки на сервер
