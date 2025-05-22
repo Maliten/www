@@ -1,0 +1,18 @@
+ 
+# PUT https://jsonplaceholder.typicode.com/posts/1
+# Content-Type: application/json
+
+# {
+#   "title": "foo",
+#   "body": "bar",
+#   "userId": 1
+# }
+
+
+
+
+
+# GET https://jsonplaceholder.typicode.com/posts/2
+
+GET .//users.json
+Content-Type: application/json

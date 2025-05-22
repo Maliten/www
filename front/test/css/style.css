@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    height: 100vh;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+}
+.form
+{
+    margin-top: 200px;
+    flex-direction: column;
+    width: 200px;
+}
+.select{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.button{    
+    width: 100%;
+    margin-top: 5px;
+    
+    
+}

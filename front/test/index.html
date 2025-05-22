@@ -1,0 +1,30 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">    
+    <script src="./js/script.js" defer></script>
+
+    <title>Document</title>
+ </head>
+ <body>
+    <div class="container"> 
+       <form class="form" name="testForm">
+
+         <select class="select" name="selectOrg" size="1">
+            <option value="" disabled selected hidden>Выберите организацию</option>
+            <option value="value1">Организация 1</option>
+            <option value="value2">Организация 2</option>
+            <option value="value3">Организация 3</option>         
+          </select>
+
+          <button type="button" onclick="addFunction()" class="addButton button">Add Button</button>
+          <button type="button" onclick="logFunction()" class="logButton button">Log Button</button>
+          <button type="button" onclick="writeToFileA()" class="writeToFileA button">Write to file</button>
+         </form>
+      </div>      
+ </body>
+ </html>
+
+  

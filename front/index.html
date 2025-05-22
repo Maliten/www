@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">     
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="js/script.js" defer></script>
+    <title>Регистрация пользователей</title>
+
+</head>
+<body>
+    <header>
+        <div class="header">
+            <img class="logo" src="../img/systemLogotype.png" alt="">
+        </div>
+    </header>
+    <main>
+        <div class="circle"></div>
+        <div class="circle_outer"></div>
+
+        <form class="register-form-container">
+            <h1 class="form-title">
+                Регистрация пользователя
+            </h1>
+            <div class="form-fields">
+                <!-- <div class="form-field"> -->
+                    <input class="name form-field" type="text" placeholder="ФИО" required>
+                <!-- </div>                
+                <div class="form-field"> -->
+                    <input class="post form-field" type="text" placeholder="Должность" required>
+                <!-- </div>
+                <div class="form-field"> -->
+                    <input class="cellphone form-field" type="text" placeholder="Мобильный телефон" required>
+                <!-- </div>
+                <div class="form-field"> -->
+                    <input class="phone form-field" type="tel" placeholder="Рабочий телефон" required>
+                <!-- </div>
+                <div class="form-field"> -->
+                    <input class="email form-field" type="email" placeholder="Электронная почта" required>
+                <!-- </div>
+                <div class="form-field"> -->
+                    <select class="selectOrg form-field" name="selectOrg" size="1" required>
+                        <option value="" disabled selected hidden>Выберите организацию</option>                                 
+                      </select>
+                <!-- </div> -->
+            </div>
+            <div class="form-buttons">
+                <button type="submit" class="button" onclick="getValues()">Регистрация</button>
+            </div>
+
+
+        </form>
+    </main>
+    
+    
+</body>
+</html>

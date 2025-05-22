@@ -1,0 +1,338 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    font-family: "Roboto", sans-serif;  
+    background:#F1F5FE;   
+    height: 100vh;   
+}       
+
+.logo{
+    position: absolute;
+    margin: 15px;
+    width: 150px;
+    height: auto;
+    z-index: 3;
+}
+
+main{
+    height: 100vh;     
+    position: relative;
+    /*z-index: -2;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+    overflow: hidden;
+      
+}
+
+.circle {
+    position: absolute;
+    background: #F7FAFF;
+    box-shadow: 0px 4px 70px 6px rgba(217, 229, 255, 0.452);
+    border-radius: 50%;
+    display: block;
+    height: 0;    
+    padding-top: 40%;    
+    width: 40%;
+    animation: fadeCircle 0.7s ease-in-out 0s 1 normal none;
+}
+.circle_outer {
+    position: absolute;
+    background: #d2ddf081;
+    box-shadow: 0px 4px 70px 6px rgba(217, 229, 255, 0.438);
+    border-radius: 50%;
+    display: block;
+    height: 0;    
+    padding-top: 180%;    
+    width: 180%;
+    animation: fadeCircle_outher 2s ease-in-out 0s 1 normal none;
+}
+
+.register-form-container{
+    position: relative;
+    max-width: 415px;
+    width: 100%;
+    background: #FFF;
+    box-shadow: 0px 6px 50px rgba(217,229,255);
+    border-radius: 20px;
+    padding: 38px 30px 38px 30px;
+    margin: 10px;
+    animation: fadeForm 0.5s ease-in-out 0s 1 normal none;
+}
+.form-title{
+    color: #13788E;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    margin-bottom: 38px;
+}
+ input, select{
+    height: 45px;
+    width: 100%;
+    color: #3B5983;
+    font-size: 14px;
+    line-height: 16px;
+    border: 2px solid #E9f2ff;
+    border-radius: 5px;
+    padding-left: 25px;
+ }     
+input:focus{
+    outline: none;
+    border: 2px solid #C1D9FD;
+}
+
+.form-field{
+    margin-bottom: 13px;
+}
+
+.selectOrg{
+    cursor: pointer;
+    margin-bottom: 25px;
+    background: #FFF;   
+    
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+ 
+
+}
+
+.button{
+    font-weight: bold;
+    font-size: 14px;
+    width: 100%;
+    display: block;
+    height: 45px;
+    background: #247FFF;
+    border-style: none;
+    border-radius: 5px;
+    color: #FFF;
+    text-transform: uppercase;
+    line-height: 45px;
+    cursor: pointer;
+}
+.button:hover{
+    background-color: #0D6CF2;
+}
+
+
+/*анимации кругов и появления формы*/
+@keyframes fadeForm {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 0.25;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    75% {
+        opacity: 0.75;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeCircle {
+    0% {
+        opacity: 0;
+        padding-top: 0%;    
+        width: 0%;
+    }    
+    50% {
+        opacity: 0.5;
+        padding-top: 20%;    
+        width: 20%;
+    }    
+    100% {
+        opacity: 1;
+        padding-top: 40%;    
+        width: 40%;
+    }
+}    
+@keyframes fadeCircle {
+    0% {
+        opacity: 0;
+        padding-top: 0%;    
+        width: 0%;
+    }    
+    50% {
+        opacity: 0.5;
+        padding-top: 20%;    
+        width: 20%;
+    }    
+    100% {
+        opacity: 1;
+        padding-top: 40%;    
+        width: 40%;
+    }
+}
+@keyframes fadeCircle_outher {
+    0% {
+        opacity: 0;
+        padding-top: 0%;    
+        width: 0%;
+    }          
+    100% {
+        opacity: 1;
+        padding-top: 200%;    
+        width: 180%;
+    }
+
+}
+
+
+/*медиа-запросы (адаптивность страницы)*/
+@media screen and (max-width: 1200px){
+    @keyframes fadeCircle {
+        0% {
+            opacity: 0;
+            padding-top: 0%;    
+            width: 0%;
+        }    
+        50% {
+            opacity: 0.5;
+            padding-top: 25%;    
+            width: 25%;
+        }    
+        100% {
+            opacity: 1;
+            padding-top: 50%;    
+            width: 50%;
+        }
+    }
+    .circle{
+        padding-top: 50%;    
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    @keyframes fadeCircle {
+        0% {
+                opacity: 0;
+                padding-top: 0%;    
+                width: 0%;
+            }    
+        50% {
+                opacity: 0.5;
+                padding-top: 35%;    
+                width: 35%;
+            }    
+        100% {
+                opacity: 1;
+                padding-top: 60%;    
+                width: 60%;
+            }
+    }
+    .circle{
+            padding-top: 60%;    
+            width: 60%;
+    }
+}
+
+@media screen and (max-width: 780px){
+    @keyframes fadeCircle {
+        0% {
+            opacity: 0;
+            padding-top: 0%;    
+            width: 0%;
+        }    
+        50% {
+            opacity: 0.5;
+            padding-top: 40%;    
+            width: 40%;
+        }    
+        100% {
+            opacity: 1;
+            padding-top: 80%;    
+            width: 80%;
+        }
+    }
+    .circle{
+        padding-top: 80%;    
+        width: 80%;
+    }
+    .logo{
+        margin: 15px auto;
+        left: calc(50% - 75px);
+    }
+}
+
+@media screen and (max-width: 600px){
+    
+    .circle{
+        padding-top: 130%;    
+        width: 130%;
+    }  
+    .circle_outer{
+        padding-top: 400%;    
+        width: 400%;
+    }  
+    @keyframes fadeCircle_outher {
+        0% {
+            opacity: 0;
+            padding-top: 0%;    
+            width: 0%;
+        }          
+        100% {
+            opacity: 1;
+            padding-top: 400%;    
+            width: 400%;
+        }
+    
+    }
+    @keyframes fadeCircle {
+        0% {
+            opacity: 0;
+            padding-top: 25%;    
+            width: 25%;
+        }    
+        50% {
+            opacity: 0.5;
+            padding-top: 75%;    
+            width: 75%;
+        }    
+        100% {
+            opacity: 1;
+            padding-top: 130%;    
+            width: 130%;
+        }
+    }
+    .register-form-container{
+        max-width: 360px;        
+        padding: 28px 20px 28px 20px;
+        animation: fadeForm 0.5s ease-in-out 0s 1 normal none;
+}
+
+        .form-title{               
+            font-size: 18px;
+            line-height: 18px;
+            margin-bottom: 28px;
+        }
+        input, select{
+            height: 35px;
+            font-size: 12px;
+            line-height: 12px;            
+            padding-left: 18px;
+ }     
+        .form-field{
+            margin-bottom: 10px;
+        }
+        select{
+            margin-bottom: 18px;               
+        }
+        .button{
+            height: 35px;
+            font-size: 12px;  
+            line-height: 12px;            
+        }
+}
