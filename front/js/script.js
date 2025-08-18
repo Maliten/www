@@ -39,6 +39,7 @@ function inputValidation(){
   const cellphone = document.querySelector('.cellphone').value.trim();
   const phone = document.querySelector('.phone').value.trim();
   const email = document.querySelector('.email').value.trim();
+  const itn = document.querySelector('.itn').value.trim();
 
   // Регулярные выражения
   const namePattern = /^[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+\s[А-ЯЁ][а-яё]+$/;
@@ -46,6 +47,7 @@ function inputValidation(){
   const cellphonePattern = /^\+7\d{10}$/;
   const phonePattern = /^8\d{9}$/;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const itnPattern = /^\d{10}$/;
 
   // Проверка каждого поля
   if (!namePattern.test(name)) {
@@ -70,6 +72,11 @@ function inputValidation(){
 
   if (!emailPattern.test(email)) {
     alert('Некорректный email. Проверьте формат.');
+    return false;
+  }
+
+  if (!itnPattern.test(itn)) {
+    alert('Некорректный ИНН. Введите 10 цифр.');
     return false;
   }
 
@@ -134,6 +141,7 @@ let values = {
   "cellphone": document.querySelector('.cellphone').value,
   "phone": document.querySelector('.phone').value,
   "email": document.querySelector('.email').value,
+  "itn": document.querySelector('.itn').value,
   "selectOrg": document.querySelector('.selectOrg').value
 }
     console.log('Данные прочитаны');
