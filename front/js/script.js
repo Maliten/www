@@ -148,6 +148,7 @@ let values = {
 // Вызов функции отправки на сервер и передача ей словаря с данными
     
     writeToFileA(values);
+    document.querySelector('.register-form-container').reset(); // очистка формы
     alert('Данные отправлены и сохранены');
 }
 
