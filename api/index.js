@@ -7,7 +7,7 @@ app.use(express.json());
 
 const port = 3000;
 
-const fields = ['name','post','cellphone','phone','email','selectOrg']
+const fields = ['name','post','cellphone','phone','email','itn','selectOrg']
 
 
 // GET
