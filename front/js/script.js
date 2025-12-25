@@ -85,28 +85,140 @@ function inputValidation(){
   return true;
 }
 
-
-
-
-
-
-
-// Добавление события load для вызова функции заполнения списка данными при загрузке страницы 
+// Изменено: после загрузки списка вызываем инициализацию поискового селекта
 window.addEventListener('load', () => {
   console.log('Страница загружена, список дополняется..');
 
 // Вызов функции заполнения и переача ей URL текстового файла и класса элемента select в который необходимо совершить заполнение
   loadOptionsIntoSelect('./files/orgList.txt', 'selectOrg');
   console.log('Cписок заполнен');
+
+  // Инициализировать searchable select (ждёт появления опций)
+  initSearchableWhenReady('selectOrg');
 });
 
+/**
+ * Преобразует <select class="..."> в searchable dropdown.
+ */
+function makeSelectSearchable(selectClass){
+  const select = document.querySelector('.' + selectClass);
+  if (!select) return;
+  if (select.dataset.searchable === '1') return;
 
+  select.style.display = 'none';
+  select.dataset.searchable = '1';
 
+  const wrapper = document.createElement('div');
+  wrapper.className = 'searchable-select';
 
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Поиск организации...';
+  input.className = 'searchable-input form-field'; // <-- добавлен класс form-field чтобы сохранить отступы/стили
+  input.autocomplete = 'off';
 
+  const list = document.createElement('div');
+  list.className = 'searchable-options';
+  list.style.display = 'none';
 
+  function renderOptions(filter = '') {
+    list.innerHTML = '';
+    const f = filter.trim().toLowerCase();
+    Array.from(select.options).forEach(opt => {
+      if (opt.disabled) return;
+      const text = opt.text.trim();
+      if (f && !text.toLowerCase().includes(f)) return;
+      // заменяем простую вставку текста на span с анимацией при hover
+      const item = document.createElement('div');
+      item.className = 'searchable-option';
 
+      const span = document.createElement('span');
+      span.className = 'option-text';
+      span.textContent = text;
+      item.appendChild(span);
 
+      item.dataset.value = opt.value;
+      list.appendChild(item);
+
+      // При наведении — если текст шире контейнера, запускаем marquee
+      item.addEventListener('mouseenter', () => {
+        // небольшая задержка, чтобы избежать мерцания при быстром движении мыши
+        // измеряем размеры
+        const contW = item.clientWidth;
+        const textW = span.scrollWidth;
+        const diff = textW - contW;
+        if (diff > 8) {
+          const px = -diff; // отрицательное смещение влево
+          // скорость ~ 60 px/s, минимум 2s
+          const durationSec = Math.max(2, Math.abs(diff) / 60);
+          item.style.setProperty('--marq-d', px + 'px');
+          item.style.setProperty('--marq-t', durationSec + 's');
+          item.classList.add('marquee');
+        }
+      });
+
+      item.addEventListener('mouseleave', () => {
+        item.classList.remove('marquee');
+        item.style.removeProperty('--marq-d');
+        item.style.removeProperty('--marq-t');
+      });
+
+      item.addEventListener('click', () => {
+        select.value = item.dataset.value;
+        input.value = span.textContent;
+        closeList();
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    });
+    if (!list.children.length){
+      const none = document.createElement('div');
+      none.className = 'searchable-none';
+      none.textContent = 'Нет результатов';
+      list.appendChild(none);
+    }
+  }
+
+  function openList(){
+    renderOptions(input.value);
+    list.style.display = 'block';
+    wrapper.classList.add('open');
+  }
+  function closeList(){
+    list.style.display = 'none';
+    wrapper.classList.remove('open');
+  }
+
+  input.addEventListener('input', () => {
+    renderOptions(input.value);
+    list.style.display = 'block';
+  });
+  input.addEventListener('focus', openList);
+  document.addEventListener('click', (e) => { if (!wrapper.contains(e.target)) closeList(); });
+
+  wrapper.appendChild(input);
+  wrapper.appendChild(list);
+  select.parentNode.insertBefore(wrapper, select);
+
+  if (select.value){
+    const selOpt = select.options[select.selectedIndex];
+    if (selOpt) input.value = selOpt.text;
+  }
+  renderOptions();
+}
+
+/**
+ * Ждёт появления опций в select и затем вызывает makeSelectSearchable.
+ */
+function initSearchableWhenReady(selectorClass, timeout = 5000){
+  const select = document.querySelector('.' + selectorClass);
+  if (!select) return;
+  if (select.options.length > 1) { makeSelectSearchable(selectorClass); return; }
+  const mo = new MutationObserver(() => {
+    if (select.options.length > 0) { makeSelectSearchable(selectorClass); mo.disconnect(); }
+  });
+  mo.observe(select, { childList: true });
+  setTimeout(() => { makeSelectSearchable(selectorClass); mo.disconnect(); }, timeout);
+}
 
 // Добавление события submit для вызова функции getValues при отправке формы
 // Позволяет исклчить нежелательную перезагрузку страницы формы в процессе валидации
@@ -151,6 +263,16 @@ let values = {
     document.querySelector('.register-form-container').reset(); // очистка формы
     alert('Данные отправлены и сохранены');
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

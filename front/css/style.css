@@ -336,3 +336,105 @@ input:focus{
             line-height: 12px;            
         }
 }
+
+/* Обновлённые стили для searchable select — привести шрифты/отступы к виду input */
+.searchable-select { position: relative; width: 100%; margin-bottom: 13px; }
+
+.searchable-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 45px;                /* как у input */
+  padding-left: 25px;         /* как у input */
+  border: 2px solid #E9f2ff;  /* как у input */
+  border-radius: 5px;
+  background: #fff;
+  color: #3B5983;             /* как у input */
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;           /* нормальный вес */
+}
+
+.searchable-options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow: auto;
+  background: #fff;
+  border: 2px solid #E9f2ff;  /* похожая граница на input */
+  margin-top: 6px;
+  z-index: 1000;
+  border-radius: 5px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+}
+
+.searchable-option {
+  padding: 10px 12px;
+  padding-left: 25px;         /* выравнивание текста по input */
+  cursor: pointer;
+  color: #3B5983;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+
+.searchable-option:hover { background: #f0f6ff; }
+
+.searchable-none {
+  padding: 10px 12px;
+  padding-left: 25px;
+  color: #666;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+/* Вложенный span для опций и анимация "marquee" */
+.searchable-option { overflow: hidden; position: relative; }
+.searchable-option .option-text {
+  display: inline-block;
+  white-space: nowrap;
+  transform: translateX(0);
+  will-change: transform;
+  padding-right: 10px; /* немного отступа справа чтобы было видно конец текста */
+  transition: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+/* Запуск анимации при добавлении класса .marquee.
+   --marq-d: смещение (отрицательное), --marq-t: длительность */
+.searchable-option.marquee .option-text {
+  animation: marquee var(--marq-t, 4s) linear infinite;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  85%  { transform: translateX(var(--marq-d, 0)); } /* едем влево, показывая конец строки */
+  100% { transform: translateX(0); } /* мгновенный возврат в начало */
+}
+
+/* Мобильные размеры — согласовать с существующими media rules */
+@media screen and (max-width: 600px){
+  .searchable-input {
+    height: 35px;
+    font-size: 12px;
+    line-height: 12px;
+    padding-left: 18px;
+  }
+  .searchable-option,
+  .searchable-none {
+    font-size: 12px;
+    line-height: 12px;
+    padding-left: 18px;
+  }
+}
